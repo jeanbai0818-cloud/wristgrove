@@ -131,9 +131,16 @@ struct PhoneMetricDetail: View {
                 }
             }
             Section(GroveCopy.text("了解这项数据", "About this reading")) {
-                Text(GroveCopy.samplingExplanation).font(.footnote)
-                Text(GroveCopy.text("数据由 Apple 健康提供。空白可能表示尚无记录或未开放读取；腕森无法区分这两种情况。",
-                                    "Data comes from Apple Health. An empty result can mean no records or no read access; WristGrove cannot distinguish them."))
+                Text(model.isDemo
+                     ? GroveCopy.text("当前显示本地合成演示数据，不需要健康权限。连接 Apple 健康后，读数会注明真实采样时间。",
+                                      "These are local synthetic demo readings and need no Health access. After connecting Apple Health, each reading shows its actual sample time.")
+                     : GroveCopy.samplingExplanation)
+                    .font(.footnote)
+                Text(model.isDemo
+                     ? GroveCopy.text("演示数值不来自 Apple 健康，也不会与真实数据混合。",
+                                      "Demo values do not come from Apple Health and are never mixed with real data.")
+                     : GroveCopy.text("数据由 Apple 健康提供。空白可能表示尚无记录或未开放读取；腕森无法区分这两种情况。",
+                                      "Data comes from Apple Health. An empty result can mean no records or no read access; WristGrove cannot distinguish them."))
                     .font(.footnote)
             }
         }
