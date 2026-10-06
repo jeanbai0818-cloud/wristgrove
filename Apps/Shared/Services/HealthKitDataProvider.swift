@@ -29,6 +29,7 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone
         let today = calendar.startOfDay(for: now)
+        let queryCalendar = calendar
         #if os(iOS)
         let historyStart = calendar.date(byAdding: .day, value: -28, to: today) ?? today
         #else
@@ -41,7 +42,7 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         async let heartResult = captured { try await self.latestReading(.heartRate, type: .heartRate, unit: .count().unitDivided(by: .minute()), unitLabel: "bpm", before: now) }
         async let restingResult = captured { try await self.latestReading(.restingHeartRate, type: .restingHeartRate, unit: .count().unitDivided(by: .minute()), unitLabel: "bpm", before: now) }
         async let stepsResult = captured { try await self.steps(from: today, to: now) }
-        async let sleepResult = captured { try await self.sleep(before: now, calendar: calendar) }
+        async let sleepResult = captured { try await self.sleep(before: now, calendar: queryCalendar) }
 
         let hrv = await hrvResult
         let heart = await heartResult
