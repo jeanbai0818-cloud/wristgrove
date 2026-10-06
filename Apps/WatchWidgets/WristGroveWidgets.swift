@@ -151,6 +151,7 @@ private struct GroveWidgetView: View {
         .padding(.horizontal, 3)
     }
 
+    @ViewBuilder
     private var inline: some View {
         let reading = entry.snapshot?.reading(for: entry.metric.metric)
         if entry.metric == .trend {
