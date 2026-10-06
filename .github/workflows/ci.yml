@@ -1,0 +1,43 @@
+name: Apple platforms
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode 26
+        run: sudo xcode-select --switch /Applications/Xcode_26.6.app/Contents/Developer
+      - name: Test the shared domain package
+        run: swift test --package-path Packages/WristGroveCore
+
+  apple-build:
+    runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - scheme: WristGrove
+            destination: generic/platform=iOS Simulator
+          - scheme: WristGrove Watch
+            destination: generic/platform=watchOS Simulator
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode 26
+        run: sudo xcode-select --switch /Applications/Xcode_26.6.app/Contents/Developer
+      - name: Build ${{ matrix.scheme }}
+        run: >-
+          xcodebuild
+          -project WristGrove.xcodeproj
+          -scheme "${{ matrix.scheme }}"
+          -destination "${{ matrix.destination }}"
+          -configuration Debug
+          CODE_SIGNING_ALLOWED=NO
+          build
