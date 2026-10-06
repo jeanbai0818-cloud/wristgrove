@@ -167,6 +167,16 @@ private struct GroveWidget: Widget {
     let metric: WidgetMetric
     let kind: String
 
+    init() {
+        metric = .trend
+        kind = "wristgrove.trend"
+    }
+
+    init(metric: WidgetMetric, kind: String) {
+        self.metric = metric
+        self.kind = kind
+    }
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: GroveWidgetProvider(metric: metric)) { entry in
             GroveWidgetView(entry: entry)

@@ -120,9 +120,11 @@ final class HRVEngineTests: XCTestCase {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = zone
         let yesterday = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: now))!
-        let history = [0, 1, 2].map { index in
-            HRVSample(id: UUID(), valueMilliseconds: Double(40 + index),
-                      timestamp: yesterday.addingTimeInterval(TimeInterval((index + 1) * 3600)), sourceID: "watch:A")
+        var history: [HRVSample] = []
+        for index in 0..<3 {
+            let sampleTime = yesterday.addingTimeInterval(TimeInterval(index + 1) * 3_600)
+            history.append(HRVSample(id: UUID(), valueMilliseconds: Double(40 + index),
+                                     timestamp: sampleTime, sourceID: "watch:A"))
         }
         let points = HRVEngine.dailyHistory(samples: history, sourceID: "watch:A", now: now, timeZone: zone, days: 2)
         XCTAssertTrue(points.count == 1)
