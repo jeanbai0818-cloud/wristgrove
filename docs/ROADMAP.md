@@ -11,5 +11,6 @@ Each milestone has a release gate. A successful simulator build is not device or
 
 ## Current status
 
-Development has started. Public repository and signing are prerequisites for distribution. No release is complete until it has been installed and its release page/build has been checked. This repository currently targets the 0.1 gate; device and distribution checks remain separate gates.
+The v0.1 prototype code gate passed on 2026-10-07: the shared core tests and iOS/watchOS Simulator builds passed in GitHub Actions. The v0.2 HealthKit, baseline, widget and cached-sync implementation is present; paired-device validation remains pending. Its release gate remains open until the paired-device checklist records real-data, offline, cross-day, permission and background-delivery results.
 
+Distribution and signing remain later gates. No release is complete until it has been installed and its release page/build has been checked.

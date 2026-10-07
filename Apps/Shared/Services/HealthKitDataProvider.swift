@@ -152,12 +152,14 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         let datePredicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
         let manualPredicate = HKQuery.predicateForObjects(withMetadataKey: HKMetadataKeyWasUserEntered, allowedValues: [true])
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, NSCompoundPredicate(notPredicateWithSubpredicate: manualPredicate)])
-        let totals: [StepTotal] = try await withCheckedThrowingContinuation { continuation in
+        let totals: [StepSourceTotal] = try await withCheckedThrowingContinuation { continuation in
             let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: [.cumulativeSum, .separateBySource]) { _, statistics, error in
                 if let error { continuation.resume(throwing: error); return }
-                let totals = (statistics?.sources ?? []).compactMap { source -> StepTotal? in
+                let totals = (statistics?.sources ?? []).compactMap { source -> StepSourceTotal? in
                     guard let value = statistics?.sumQuantity(for: source)?.doubleValue(for: .count()), value.isFinite, value >= 0 else { return nil }
-                    return StepTotal(sourceID: source.bundleIdentifier, value: value)
+                    return StepSourceTotal(sourceID: source.bundleIdentifier,
+                                           value: value,
+                                           isAppleSource: source.bundleIdentifier.hasPrefix("com.apple."))
                 }
                 continuation.resume(returning: totals)
             }
@@ -167,8 +169,7 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         // would double-count. Prefer the largest Apple source, then the largest
         // remaining source. This conservative total can differ from Health's
         // private source-priority presentation and is documented in the app.
-        let appleTotals = totals.filter { $0.sourceID.hasPrefix("com.apple.") }
-        guard let chosen = (appleTotals.isEmpty ? totals : appleTotals).max(by: { $0.value < $1.value }) else {
+        guard let chosen = HealthAggregation.preferredSteps(from: totals) else {
             return MetricReading(metric: .steps, unit: "steps", state: .noData)
         }
         let samples = try await quantities(type: .stepCount, from: start, to: end, limit: HKObjectQueryNoLimit)
@@ -195,26 +196,17 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         }
         let asleepValues: Set<Int> = [HKCategoryValueSleepAnalysis.asleepUnspecified.rawValue, HKCategoryValueSleepAnalysis.asleepCore.rawValue, HKCategoryValueSleepAnalysis.asleepDeep.rawValue, HKCategoryValueSleepAnalysis.asleepREM.rawValue]
         let asleep = samples.filter { asleepValues.contains($0.value) && !Self.isUserEntered($0) }
-        let groups = Dictionary(grouping: asleep, by: Self.sourceID)
-        let results = groups.map { source, values -> SleepTotal in
-            let intervals = values.compactMap { sample -> DateInterval? in
-                let left = max(start, sample.startDate)
-                let right = min(end, sample.endDate)
-                return right > left ? DateInterval(start: left, end: right) : nil
-            }.sorted { $0.start < $1.start }
-            var merged: [DateInterval] = []
-            for interval in intervals {
-                if let last = merged.last, interval.start <= last.end {
-                    merged[merged.count - 1] = DateInterval(start: last.start, end: max(last.end, interval.end))
-                } else { merged.append(interval) }
-            }
-            return SleepTotal(sourceID: source, seconds: merged.reduce(0) { $0 + $1.duration }, sampledAt: merged.last?.end, isAppleWatch: values.contains(where: Self.isAppleWatch))
-        }.filter { $0.seconds > 0 }
-        let watches = results.filter(\.isAppleWatch)
-        guard let selected = (watches.isEmpty ? results : watches).max(by: { $0.seconds < $1.seconds }) else {
+        let intervals = asleep.compactMap { sample -> SleepInterval? in
+            let left = max(start, sample.startDate)
+            let right = min(end, sample.endDate)
+            guard right > left else { return nil }
+            return SleepInterval(sourceID: Self.sourceID(sample), start: left, end: right,
+                                 isAppleWatch: Self.isAppleWatch(sample))
+        }
+        guard let selected = HealthAggregation.preferredSleepSummary(from: intervals) else {
             return MetricReading(metric: .sleep, unit: "hours", state: .noData)
         }
-        return MetricReading(metric: .sleep, value: selected.seconds / 3600, unit: "hours", sampledAt: selected.sampledAt, sourceID: selected.sourceID, state: .available)
+        return MetricReading(metric: .sleep, value: selected.durationSeconds / 3600, unit: "hours", sampledAt: selected.sampledAt, sourceID: selected.sourceID, state: .available)
     }
 
     private func reading(from result: Result<MetricReading, Error>, metric: MetricKind, unit: String) -> MetricReading {
@@ -241,18 +233,6 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         [sample.sourceRevision.source.bundleIdentifier, sample.sourceRevision.productType ?? sample.device?.model ?? "unknown", sample.device?.localIdentifier ?? ""]
             .joined(separator: "|")
     }
-}
-
-private struct StepTotal: Sendable {
-    let sourceID: String
-    let value: Double
-}
-
-private struct SleepTotal: Sendable {
-    let sourceID: String
-    let seconds: Double
-    let sampledAt: Date?
-    let isAppleWatch: Bool
 }
 
 private func captured<T: Sendable>(_ operation: @escaping @Sendable () async throws -> T) async -> Result<T, Error> {

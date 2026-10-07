@@ -2,7 +2,7 @@
 
 ## Automated
 
-- Core package tests cover the HRV window, daily median, Q25/Q75 thresholds, equal quartiles, minimum sample/day rules, duplicate IDs, invalid/manual samples, source mismatch, time-zone boundaries, schema versions, demo/real isolation and stale merge behavior.
+- Core package tests cover the HRV window, daily median, Q25/Q75 thresholds, equal quartiles, minimum sample/day rules, deterministic duplicate-ID cleanup, invalid/manual samples, source and algorithm-version mismatch, time-zone boundaries, step-source selection, overlapping sleep intervals, demo/real isolation and stale merge behavior.
 - CI runs `swift test --package-path Packages/WristGroveCore`, builds the iOS app including the embedded Watch app/widget for iOS Simulator, and builds the standalone Watch app/widget for Watch Simulator with Xcode 26 or newer.
 - Demo snapshots remain distinguishable in the app, Watch and complications; no demo value appears in real mode.
 
@@ -15,4 +15,3 @@
 - Widget families, timeline reloads under deferred system scheduling, taps into Watch detail, VoiceOver labels, dark mode and reduced screen size.
 - Run background delivery without the debugger attached. Record observed refresh and battery behavior; no minimum refresh interval is claimed.
 - TestFlight: signed build processes, installs on the paired devices and its build/privacy metadata match the source and policy.
-
