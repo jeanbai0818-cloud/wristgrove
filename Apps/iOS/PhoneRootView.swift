@@ -8,7 +8,7 @@ struct PhoneRootView: View {
     var body: some View {
         TabView(selection: $selection) {
             NavigationStack { TodayView() }
-                .tabItem { Label(GroveCopy.text("今日", "Today"), systemImage: "leaf") }
+                .tabItem { Label(GroveCopy.text("表盘", "Watch Face"), systemImage: "applewatch") }
                 .tag(0)
             NavigationStack { TrendsView() }
                 .tabItem { Label(GroveCopy.text("趋势", "Trends"), systemImage: "chart.xyaxis.line") }
@@ -26,38 +26,86 @@ struct PhoneRootView: View {
 struct TodayView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.colorScheme) private var scheme
+    @AppStorage("wristgrove.faceSetupChoice") private var selectedChoiceKey = FaceDisplayChoice.stress.rawValue
     private let metrics: [MetricKind] = [.hrvSDNN, .heartRate, .restingHeartRate, .steps, .sleep]
+
+    private var selectedChoice: FaceDisplayChoice {
+        get { FaceDisplayChoice(rawValue: selectedChoiceKey) ?? .stress }
+        nonmutating set { selectedChoiceKey = newValue.rawValue }
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                HStack(spacing: 14) {
-                    GroveMark(size: 56)
+                HStack(spacing: 12) {
+                    GroveMark(size: 46)
                     VStack(alignment: .leading, spacing: 3) {
-                        Text(GroveCopy.text("腕森", "WristGrove"))
+                        Text(GroveCopy.text("表盘工作台", "Watch Face Studio"))
                             .font(.largeTitle.weight(.semibold))
-                        Text(GroveCopy.text("听见身体的节律", "A little space for your rhythm"))
+                        Text(GroveCopy.text("选择要抬腕查看的健康信息", "Choose what you want to see at a glance"))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
                     Spacer(minLength: 0)
                 }
+                if model.isDemo { DemoBadge() }
+                GroveCard {
+                    VStack(alignment: .leading, spacing: 14) {
+                        Label(GroveCopy.text("组件预览", "Complication preview"), systemImage: "applewatch")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                        FaceComplicationPreview(choice: selectedChoice, snapshot: model.snapshot)
+                        Text(selectedChoice.description)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(GroveCopy.text("选择表盘显示内容", "Choose what the complication shows"))
+                        .font(.headline)
+                    ForEach(FaceDisplayChoice.allCases) { choice in
+                        Button { selectedChoice = choice } label: {
+                            FaceDisplayChoiceRow(choice: choice,
+                                                 selected: selectedChoice == choice,
+                                                 snapshot: model.snapshot)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityAddTraits(selectedChoice == choice ? .isSelected : [])
+                    }
+                }
+                NavigationLink {
+                    WatchFaceSetupGuideView(choice: selectedChoice)
+                } label: {
+                    Label(GroveCopy.text("继续：添加到 Apple Watch", "Continue: add to Apple Watch"), systemImage: "plus.circle.fill")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 7)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(GroveStyle.forest)
+                Text(GroveCopy.text("腕森负责提供组件和设置指引。出于 watchOS 限制，你需要在手表上确认要使用的表盘位置。",
+                                    "WristGrove provides the complication and setup steps. watchOS asks you to confirm its placement on Apple Watch."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
                 if model.isDemo {
                     demoCard
                 }
-                GroveCard { GroveTrendCard(snapshot: model.snapshot) }
-                ForEach(metrics, id: \.rawValue) { metric in
-                    NavigationLink {
-                        PhoneMetricDetail(metric: metric)
-                    } label: {
-                        GroveCard {
-                            HStack {
-                                MetricTile(metric: metric, reading: model.snapshot?.reading(for: metric), isDemo: model.isDemo)
-                                Image(systemName: "chevron.right").font(.caption).foregroundStyle(.secondary)
+                DisclosureGroup(GroveCopy.text("其他健康数据", "Other health data")) {
+                    VStack(spacing: 10) {
+                        ForEach(metrics, id: \.rawValue) { metric in
+                            NavigationLink {
+                                PhoneMetricDetail(metric: metric)
+                            } label: {
+                                GroveCard {
+                                    HStack {
+                                        MetricTile(metric: metric, reading: model.snapshot?.reading(for: metric), isDemo: model.isDemo)
+                                        Image(systemName: "chevron.right").font(.caption).foregroundStyle(.secondary)
+                                    }
+                                }
                             }
+                            .buttonStyle(.plain)
                         }
                     }
-                    .buttonStyle(.plain)
                 }
                 if let error = model.errorMessage {
                     Label(error, systemImage: "exclamationmark.circle")
@@ -97,7 +145,6 @@ struct TodayView: View {
     private var demoCard: some View {
         GroveCard {
             VStack(alignment: .leading, spacing: 12) {
-                DemoBadge()
                 Text(GroveCopy.text("先逛一逛腕森。连接 Apple 健康后，就能查看自己的记录。",
                                     "Explore WristGrove first. Connect Apple Health to view your own records."))
                     .font(.subheadline)
@@ -108,6 +155,185 @@ struct TodayView: View {
                 .disabled(model.isRefreshing)
             }
         }
+    }
+}
+
+private enum FaceDisplayChoice: String, CaseIterable, Identifiable, Equatable {
+    case stress, latestHRV, steps
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .stress: GroveCopy.text("压力参考", "Stress reference")
+        case .latestHRV: GroveCopy.text("最近 HRV", "Latest HRV")
+        case .steps: GroveCopy.text("今日步数", "Today's steps")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .stress: "waveform.path.ecg"
+        case .latestHRV: "heart"
+        case .steps: "figure.walk"
+        }
+    }
+
+    var metric: MetricKind { self == .steps ? .steps : .hrvSDNN }
+
+    var description: String {
+        switch self {
+        case .stress:
+            GroveCopy.text("比较同一时段的 SDNN HRV 与你的个人范围，作为压力参考。", "Compare SDNN HRV at the same time of day with your personal range as a stress reference.")
+        case .latestHRV:
+            GroveCopy.text("显示 Apple 健康记录的最近一次 SDNN HRV 和采样时间。", "Show the latest SDNN HRV reading from Apple Health and its sample time.")
+        case .steps:
+            GroveCopy.text("显示 Apple 健康记录的今日步数。", "Show today's step count from Apple Health.")
+        }
+    }
+
+    var widgetName: String { title }
+
+    func value(in snapshot: HealthSnapshot?, at now: Date = Date()) -> String {
+        if self == .stress {
+            return HealthPresentation.compactTrendTitle(snapshot, at: now)
+        }
+        return HealthPresentation.value(snapshot?.reading(for: metric))
+    }
+}
+
+private struct FaceComplicationPreview: View {
+    let choice: FaceDisplayChoice
+    let snapshot: HealthSnapshot?
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 32, style: .continuous)
+                .fill(LinearGradient(colors: [GroveStyle.night, GroveStyle.forest], startPoint: .topLeading, endPoint: .bottomTrailing))
+            Circle()
+                .stroke(.white.opacity(0.09), lineWidth: 1)
+                .padding(18)
+            VStack(spacing: 13) {
+                Text(Date.now.formatted(date: .omitted, time: .shortened))
+                    .font(.system(size: 34, weight: .light, design: .rounded).monospacedDigit())
+                    .foregroundStyle(GroveStyle.cream)
+                HStack(spacing: 10) {
+                    Image(systemName: choice.symbol)
+                        .font(.title3.weight(.medium))
+                        .foregroundStyle(GroveStyle.sage)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(choice.title.uppercased())
+                            .font(.system(size: 9, weight: .semibold, design: .rounded))
+                            .tracking(0.7)
+                            .foregroundStyle(.white.opacity(0.72))
+                        Text(choice.value(in: snapshot))
+                            .font(.system(size: 17, weight: .semibold, design: .rounded))
+                            .foregroundStyle(GroveStyle.cream)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "leaf")
+                        .font(.caption)
+                        .foregroundStyle(GroveStyle.sage.opacity(0.8))
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(.white.opacity(0.09), in: RoundedRectangle(cornerRadius: 17))
+            }
+            .padding(22)
+        }
+        .frame(height: 220)
+        .overlay(alignment: .bottomTrailing) {
+            Text(GroveCopy.text("腕森组件预览", "WRISTGROVE PREVIEW"))
+                .font(.system(size: 8, weight: .medium))
+                .tracking(0.8)
+                .foregroundStyle(.white.opacity(0.55))
+                .padding(14)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(GroveCopy.text("表盘组件预览：\(choice.title)，\(choice.value(in: snapshot))",
+                                           "Watch face complication preview: \(choice.title), \(choice.value(in: snapshot))"))
+    }
+}
+
+private struct FaceDisplayChoiceRow: View {
+    @Environment(\.colorScheme) private var scheme
+    let choice: FaceDisplayChoice
+    let selected: Bool
+    let snapshot: HealthSnapshot?
+
+    var body: some View {
+        HStack(spacing: 13) {
+            Image(systemName: choice.symbol)
+                .font(.title3)
+                .foregroundStyle(selected ? GroveStyle.forest : .secondary)
+                .frame(width: 40, height: 40)
+                .background(GroveStyle.sage.opacity(selected ? 0.3 : 0.13), in: RoundedRectangle(cornerRadius: 13))
+            VStack(alignment: .leading, spacing: 3) {
+                Text(choice.title).font(.subheadline.weight(.semibold))
+                Text(choice.description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+            Spacer(minLength: 4)
+            Text(choice.value(in: snapshot))
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(selected ? GroveStyle.forest : .secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+            if selected {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundStyle(GroveStyle.forest)
+            }
+        }
+        .padding(13)
+        .background(GroveStyle.card(scheme), in: RoundedRectangle(cornerRadius: 20))
+        .overlay {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(selected ? GroveStyle.sage : .clear, lineWidth: 2)
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+private struct WatchFaceSetupGuideView: View {
+    let choice: FaceDisplayChoice
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                GroveCard {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Label(GroveCopy.faceSetupTitle, systemImage: "applewatch")
+                            .font(.headline)
+                        Text(GroveCopy.faceSetupLimit)
+                            .font(.subheadline)
+                        Text(GroveCopy.trendExplanation)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                ForEach(Array(GroveCopy.faceSetupSteps(widgetName: choice.widgetName).enumerated()), id: \.offset) { index, step in
+                    GroveCard {
+                        HStack(alignment: .top, spacing: 12) {
+                            Text("\(index + 1)")
+                                .font(.headline.monospacedDigit())
+                                .foregroundStyle(GroveStyle.forest)
+                                .frame(width: 28, height: 28)
+                                .background(GroveStyle.sage.opacity(0.28), in: Circle())
+                            Text(step)
+                                .font(.body)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                }
+            }
+            .padding(18)
+        }
+        .navigationTitle(GroveCopy.faceSetupTitle)
     }
 }
 

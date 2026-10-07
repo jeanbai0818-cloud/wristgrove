@@ -47,7 +47,7 @@ struct GroveTrendCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: compact ? 7 : 12) {
-            Label(GroveCopy.text("HRV 个人趋势", "Personal HRV trend"), systemImage: "leaf")
+            Label(GroveCopy.text("表盘压力参考 · SDNN HRV", "Watch-face stress reference · SDNN HRV"), systemImage: "waveform.path.ecg")
                 .font(compact ? .caption : .subheadline)
                 .foregroundStyle(.secondary)
             Text(HealthPresentation.trendTitle(snapshot))

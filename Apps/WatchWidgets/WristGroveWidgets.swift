@@ -7,9 +7,17 @@ private enum WidgetMetric: String {
 
     var title: String {
         switch self {
-        case .trend: GroveCopy.text("HRV 趋势", "HRV trend")
+        case .trend: GroveCopy.text("压力参考", "Stress reference")
         case .hrv: GroveCopy.text("最近 HRV", "Latest HRV")
         case .steps: GroveCopy.text("今日步数", "Today's steps")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .trend: "waveform.path.ecg"
+        case .hrv: "heart"
+        case .steps: "figure.walk"
         }
     }
 
@@ -67,14 +75,16 @@ private struct GroveWidgetView: View {
 
     private var circular: some View {
         VStack(spacing: 3) {
-            Image(systemName: entry.metric == .steps ? "figure.walk" : "leaf")
+            Image(systemName: entry.metric.symbol)
                 .font(.caption)
                 .foregroundStyle(scheme == .dark ? GroveStyle.sage : GroveStyle.forest)
             if entry.metric == .trend {
-                Text(HealthPresentation.trendTitle(entry.snapshot, at: entry.date))
+                Text(GroveCopy.text("压力参考", "Stress"))
+                    .font(.system(size: 8, weight: .medium))
+                Text(HealthPresentation.compactTrendTitle(entry.snapshot, at: entry.date))
                     .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
             } else {
                 let reading = entry.snapshot?.reading(for: entry.metric.metric)
                 Text(HealthPresentation.value(reading))
@@ -109,7 +119,7 @@ private struct GroveWidgetView: View {
     private var rectangular: some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 5) {
-                Image(systemName: entry.metric == .steps ? "figure.walk" : "leaf")
+                Image(systemName: entry.metric.symbol)
                     .foregroundStyle(scheme == .dark ? GroveStyle.sage : GroveStyle.forest)
                 Text(entry.metric.title).font(.caption).foregroundStyle(.secondary)
                 Spacer(minLength: 0)
@@ -155,8 +165,9 @@ private struct GroveWidgetView: View {
     private var inline: some View {
         let reading = entry.snapshot?.reading(for: entry.metric.metric)
         if entry.metric == .trend {
-            Text((entry.snapshot?.isDemo == true ? GroveCopy.text("演示 · ", "DEMO · ") : "🌿 ")
-                 + HealthPresentation.trendTitle(entry.snapshot, at: entry.date))
+            Text((entry.snapshot?.isDemo == true ? GroveCopy.text("演示 · ", "DEMO · ") : "")
+                 + GroveCopy.text("压力参考", "Stress") + " · "
+                 + HealthPresentation.compactTrendTitle(entry.snapshot, at: entry.date))
         } else {
             Text((entry.snapshot?.isDemo == true ? GroveCopy.text("演示 · ", "DEMO · ") : "")
                  + "\(entry.metric == .steps ? GroveCopy.text("步", "steps") : "HRV") · \(HealthPresentation.value(reading))")
@@ -183,7 +194,9 @@ private struct GroveWidget: Widget {
             GroveWidgetView(entry: entry)
         }
         .configurationDisplayName(metric.title)
-        .description(GroveCopy.text("显示腕森设备内的健康摘要。", "Show an on-device WristGrove summary."))
+        .description(metric == .trend
+                     ? GroveCopy.text("以个人 HRV 趋势提供压力参考；不是心理压力测量。", "Use personal HRV trends as a stress reference; this does not measure mental stress.")
+                     : GroveCopy.text("显示腕森设备内的健康摘要。", "Show an on-device WristGrove summary."))
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }

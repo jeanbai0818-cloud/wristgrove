@@ -11,7 +11,17 @@ struct WatchRootView: View {
             ScrollView {
                 VStack(spacing: 12) {
                     if model.isDemo { DemoBadge() }
-                    GroveCard { GroveTrendCard(snapshot: model.snapshot, compact: true) }
+                    GroveCard {
+                        VStack(alignment: .leading, spacing: 8) {
+                            GroveTrendCard(snapshot: model.snapshot, compact: true)
+                            NavigationLink {
+                                WatchFaceSetupGuideView()
+                            } label: {
+                                Label(GroveCopy.text("如何添加到表盘", "How to add to a watch face"), systemImage: "plus.circle")
+                                    .font(.caption)
+                            }
+                        }
+                    }
                     if model.isDemo {
                         GroveCard {
                             VStack(alignment: .leading, spacing: 9) {
@@ -81,6 +91,34 @@ struct WatchRootView: View {
                 }
             }
         }
+    }
+}
+
+private struct WatchFaceSetupGuideView: View {
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(GroveCopy.faceSetupLimit)
+                    .font(.caption)
+                ForEach(Array(GroveCopy.faceSetupSteps.enumerated()), id: \.offset) { index, step in
+                    GroveCard {
+                        HStack(alignment: .top, spacing: 8) {
+                            Text("\(index + 1)")
+                                .font(.caption.weight(.bold).monospacedDigit())
+                                .foregroundStyle(GroveStyle.forest)
+                            Text(step)
+                                .font(.caption)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                }
+                Text(GroveCopy.trendExplanation)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 8)
+        }
+        .navigationTitle(GroveCopy.faceSetupTitle)
     }
 }
 

@@ -5,6 +5,7 @@
 - Core package tests cover the HRV window, daily median, Q25/Q75 thresholds, equal quartiles, minimum sample/day rules, deterministic duplicate-ID cleanup, invalid/manual samples, source and algorithm-version mismatch, time-zone boundaries, step-source selection, overlapping sleep intervals, demo/real isolation and stale merge behavior.
 - CI runs `swift test --package-path Packages/WristGroveCore`, builds the iOS app including the embedded Watch app/widget for iOS Simulator, and builds the standalone Watch app/widget for Watch Simulator with Xcode 26 or newer.
 - Demo snapshots remain distinguishable in the app, Watch and complications; no demo value appears in real mode.
+- The iPhone landing screen opens as a face setup studio; changing the selected complication updates its preview and the matching manual setup guide.
 
 ## Paired-device validation (record device/OS/build)
 

@@ -33,6 +33,14 @@ enum HealthPresentation {
         return GroveCopy.band(trend.band)
     }
 
+    static func compactTrendTitle(_ snapshot: HealthSnapshot?, at now: Date = Date()) -> String {
+        guard let snapshot else { return GroveCopy.text("无数据", "No data") }
+        guard trendIsCurrent(snapshot, at: now), let trend = snapshot.trend else {
+            return GroveCopy.text("更新", "Update")
+        }
+        return GroveCopy.compactBand(trend.band)
+    }
+
     static func metricURL(_ metric: MetricKind) -> URL {
         URL(string: "wristgrove://metric/\(GroveCopy.code(metric))")!
     }
