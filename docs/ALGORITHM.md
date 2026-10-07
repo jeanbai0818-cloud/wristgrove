@@ -1,6 +1,6 @@
 # HRV trend and data semantics
 
-WristGrove reads HealthKit's `heartRateVariabilitySDNN` quantity and displays milliseconds. SDNN describes a recorded sample; it is neither a continuous signal nor a direct measurement of psychological stress. WristGrove does not diagnose, produce a stress/recovery score, or trigger stress alerts.
+The current implementation reads HealthKit's `heartRateVariabilitySDNN` quantity and displays milliseconds. SDNN describes a recorded sample; it is neither a continuous signal nor a direct measurement of psychological stress. WristGrove does not diagnose, produce a medical stress/recovery score, or trigger stress alerts. A future watchOS 27 path may read `heartRateVariabilityRMSSD` where the Watch publishes it; that method must have its own samples, baseline, and label, and must never be mixed with SDNN.
 
 ## Source and windows
 

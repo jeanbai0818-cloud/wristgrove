@@ -48,7 +48,8 @@ struct WatchRootView: View {
                         NavigationLink(value: metric) {
                             GroveCard {
                                 MetricTile(metric: metric, reading: model.snapshot?.reading(for: metric),
-                                           isDemo: model.isDemo, showsTime: false)
+                                           isDemo: model.isDemo, showsTime: false,
+                                           showsRelativeAge: metric == .hrvSDNN)
                             }
                         }
                         .buttonStyle(.plain)

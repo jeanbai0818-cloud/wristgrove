@@ -6,6 +6,7 @@ struct MetricTile: View {
     let reading: MetricReading?
     var isDemo = false
     var showsTime = true
+    var showsRelativeAge = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 9) {
@@ -30,7 +31,11 @@ struct MetricTile: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
-            if showsTime {
+            if showsRelativeAge {
+                Text(GroveCopy.sampleAge(reading?.sampledAt))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            } else if showsTime {
                 Text(GroveCopy.timestamp(reading?.sampledAt))
                     .font(.caption2)
                     .foregroundStyle(.secondary)

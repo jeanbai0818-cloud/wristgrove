@@ -113,11 +113,12 @@ final class AppModel {
     private func startObservingIfNeeded() {
         guard !isDemo, !hasStartedObservers else { return }
         hasStartedObservers = true
-        #if os(iOS)
+        // On Watch, the observer keeps the open monitoring screen responsive
+        // when watchOS publishes a new HealthKit sample. It does not control
+        // sensor cadence or promise background wakeups.
         healthProvider.startObserving { [weak self] in
             await self?.refresh()
         }
-        #endif
     }
 
     private func refreshAfterConnection() async {

@@ -93,6 +93,18 @@ enum GroveCopy {
         return date.formatted(date: .abbreviated, time: .shortened)
     }
 
+    static func sampleAge(_ date: Date?, relativeTo now: Date = Date()) -> String {
+        guard let date else { return text("等待采样", "Waiting for a sample") }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.locale = Locale(identifier: Locale.current.language.languageCode?.identifier == "zh" ? "zh_CN" : "en_US")
+        formatter.unitsStyle = .abbreviated
+        let age = formatter.localizedString(for: date, relativeTo: now)
+        return text(
+            "采样 " + age,
+            "Sampled " + age
+        )
+    }
+
     static let trendExplanation = text(
         "这是 Apple Watch 采样的 SDNN HRV 相对近期个人范围的变化，可作为压力参考。HRV 也会受运动、睡眠等因素影响，不能直接测量心理压力，也不代表好坏或疾病。",
         "This compares Apple Watch SDNN HRV samples with your recent personal range as a stress reference. HRV is also affected by exercise, sleep, and other factors; it does not directly measure mental stress or diagnose a condition.")

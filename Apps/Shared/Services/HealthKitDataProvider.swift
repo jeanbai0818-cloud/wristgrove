@@ -94,8 +94,16 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
     func startObserving(onChange: @escaping @Sendable () async -> Void) {
         observerLock.lock()
         guard observerQueries.isEmpty else { observerLock.unlock(); return }
+        #if os(watchOS)
+        // The Watch dashboard reacts to new HRV samples only. Step-count and
+        // heart-rate writes are more frequent and do not need to refresh it.
+        var types: [HKSampleType] = quantityTypes.filter {
+            $0.identifier == HKQuantityTypeIdentifier.heartRateVariabilitySDNN.rawValue
+        }
+        #else
         var types: [HKSampleType] = quantityTypes
         if let sleep = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) { types.append(sleep) }
+        #endif
         let queries = types.map { type in
             HKObserverQuery(sampleType: type, predicate: nil) { _, completion, error in
                 let token = HealthKitCompletion(completion)
@@ -109,9 +117,11 @@ final class HealthKitDataProvider: HealthDataProvider, @unchecked Sendable {
         observerQueries = queries
         observerLock.unlock()
         for query in queries { healthStore.execute(query) }
+        #if os(iOS)
         for type in types {
             healthStore.enableBackgroundDelivery(for: type, frequency: .hourly) { _, _ in }
         }
+        #endif
     }
 
     private func hrvSamples(from start: Date, to end: Date) async throws -> [HRVSample] {
