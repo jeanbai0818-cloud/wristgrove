@@ -92,8 +92,8 @@
 		EDB30428CD7A4DA0E046C2DE /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
 			files = (
 				2B4619CD7034DE0FA6C3C323 /* WristGrove Watch.app in Embed Watch Content */,
 			);

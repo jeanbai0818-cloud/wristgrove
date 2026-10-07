@@ -54,7 +54,7 @@ struct TodayView: View {
                 }
                 GroveCard {
                     VStack(alignment: .leading, spacing: 14) {
-                        Label(GroveCopy.text("组件预览", "Complication preview"), systemImage: "applewatch")
+                        Label(GroveCopy.text("表盘显示预览", "Watch face preview"), systemImage: "applewatch")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
                         FaceComplicationPreview(choice: selectedChoice, snapshot: model.snapshot)
@@ -64,7 +64,7 @@ struct TodayView: View {
                     }
                 }
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(GroveCopy.text("选择表盘显示内容", "Choose what the complication shows"))
+                    Text(GroveCopy.text("选择表盘显示内容", "Choose what to show on the face"))
                         .font(.headline)
                     ForEach(FaceDisplayChoice.allCases) { choice in
                         Button { selectedChoice = choice } label: {
@@ -79,15 +79,16 @@ struct TodayView: View {
                 NavigationLink {
                     WatchFaceSetupGuideView(choice: selectedChoice)
                 } label: {
-                    Label(GroveCopy.text("继续：添加到 Apple Watch", "Continue: add to Apple Watch"), systemImage: "plus.circle.fill")
+                    Label(GroveCopy.text("添加到表盘", "Add to watch face"), systemImage: "plus.circle.fill")
                         .font(.headline)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 7)
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(GroveStyle.forest)
-                Text(GroveCopy.text("腕森负责提供组件和设置指引。出于 watchOS 限制，你需要在手表上确认要使用的表盘位置。",
-                                    "WristGrove provides the complication and setup steps. watchOS asks you to confirm its placement on Apple Watch."))
+                Text(GroveCopy.text("腕森提供表盘显示项；watchOS 需要你在手表上确认表盘和显示位置。",
+                                    "WristGrove provides face display options. Confirm the face and placement in watchOS."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 if model.isDemo {
@@ -220,7 +221,7 @@ private enum FaceDisplayChoice: String, CaseIterable, Identifiable, Equatable {
         }
     }
 
-    var widgetName: String { title }
+    var displayName: String { title }
 
     func value(in snapshot: HealthSnapshot?, at now: Date = Date()) -> String {
         if self == .stress {
@@ -273,15 +274,15 @@ private struct FaceComplicationPreview: View {
         }
         .frame(height: 220)
         .overlay(alignment: .bottomTrailing) {
-            Text(GroveCopy.text("腕森组件预览", "WRISTGROVE PREVIEW"))
+            Text(GroveCopy.text("腕森表盘预览", "WRISTGROVE FACE PREVIEW"))
                 .font(.system(size: 8, weight: .medium))
                 .tracking(0.8)
                 .foregroundStyle(.white.opacity(0.55))
                 .padding(14)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(GroveCopy.text("表盘组件预览：\(choice.title)，\(choice.value(in: snapshot))",
-                                           "Watch face complication preview: \(choice.title), \(choice.value(in: snapshot))"))
+        .accessibilityLabel(GroveCopy.text("表盘显示预览：\(choice.title)，\(choice.value(in: snapshot))",
+                                           "Watch face preview: \(choice.title), \(choice.value(in: snapshot))"))
     }
 }
 
@@ -348,7 +349,7 @@ private struct WatchFaceSetupGuideView: View {
                     }
                 }
 
-                ForEach(Array(GroveCopy.faceSetupSteps(widgetName: choice.widgetName).enumerated()), id: \.offset) { index, step in
+                ForEach(Array(GroveCopy.faceSetupSteps(displayName: choice.displayName).enumerated()), id: \.offset) { index, step in
                     GroveCard {
                         HStack(alignment: .top, spacing: 12) {
                             Text("\(index + 1)")

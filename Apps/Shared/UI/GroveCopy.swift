@@ -100,24 +100,24 @@ enum GroveCopy {
     static let faceSetupTitle = text("把压力参考放到表盘", "Add the stress reference to your face")
 
     static let watchAppInstallNotice = text(
-        "腕森还没安装到 Apple Watch。打开 iPhone 上的 Watch App，进入“我的手表”，在“可用 App”中找到腕森并点“安装”。安装完成后，表盘组件才会出现在选择列表里。",
-        "WristGrove isn’t installed on Apple Watch yet. Open the Watch app on iPhone, tap My Watch, find WristGrove under Available Apps, and tap Install. Its complications appear in the picker after installation.")
+        "腕森还没安装到 Apple Watch。打开 iPhone 上的 Watch App，进入“我的手表”，在“可用 App”中找到腕森并点“安装”。安装后，在表盘编辑中选择腕森的压力参考、最近 HRV 或步数。",
+        "WristGrove isn’t installed on Apple Watch yet. Open the Watch app on iPhone, tap My Watch, find WristGrove under Available Apps, and tap Install. Then choose Stress Reference, Latest HRV, or Steps in the watch face editor.")
 
     static let faceSetupLimit = text(
-        "本版通过 Apple Watch 表盘组件展示健康信息。watchOS 要求你在手表上手动添加并确认位置；腕森不能静默改写当前表盘。",
-        "This version shows health information through Apple Watch complications. watchOS asks you to add the complication and confirm its placement; WristGrove can’t silently change your active face.")
+        "腕森以 Apple Watch 表盘显示项的方式呈现健康信息。你需要在表盘编辑中选择表盘和位置；腕森不会静默改写当前表盘。",
+        "WristGrove shows health information as watch face displays. Choose a face and placement in the watch face editor; WristGrove can’t silently change your active face.")
 
-    static func faceSetupSteps(widgetName: String) -> [String] {
+    static func faceSetupSteps(displayName: String) -> [String] {
         [
             text("在 Apple Watch 上按住当前表盘，然后点“编辑”。", "On Apple Watch, touch and hold the current face, then tap Edit."),
-            text("左右滑到组件位置，点你要使用的槽位。", "Swipe to the complications page and tap the slot you want to use."),
-            text("滚动到“腕森”，选择“\(widgetName)”；系统会按这个槽位提供合适的样式。", "Scroll to WristGrove and choose “\(widgetName)”; watchOS offers the styles that fit this slot."),
+            text("左右滑到“复杂功能”编辑页，也就是表盘的数据位置，然后点你要使用的位置。", "Swipe to the Complications editor, then tap the face position you want to use."),
+            text("滚动到“腕森”，选择“\(displayName)”；系统会按这个位置提供合适的显示样式。", "Scroll to WristGrove and choose “\(displayName)”; watchOS offers the display styles that fit this location."),
             text("按数码表冠保存。首次添加后，腕森会按系统安排更新显示。", "Press the Digital Crown to save. After setup, watchOS schedules complication updates.")
         ]
     }
 
     static var faceSetupSteps: [String] {
-        faceSetupSteps(widgetName: text("压力参考", "Stress Reference"))
+        faceSetupSteps(displayName: text("压力参考", "Stress Reference"))
     }
 
     static let samplingExplanation = text(
