@@ -6,12 +6,20 @@ import WristGroveCore
 final class WatchConnectivityService: NSObject {
     private(set) var activationError: String?
     private var onSnapshot: (@MainActor @Sendable (HealthSnapshot) -> Void)?
+    private var onWatchAppInstalledChange: (@MainActor @Sendable (Bool) -> Void)?
 
-    func start(receiving handler: @escaping @MainActor @Sendable (HealthSnapshot) -> Void) {
+    func start(
+        receiving handler: @escaping @MainActor @Sendable (HealthSnapshot) -> Void,
+        onWatchAppInstalledChange: (@MainActor @Sendable (Bool) -> Void)? = nil
+    ) {
         onSnapshot = handler
+        self.onWatchAppInstalledChange = onWatchAppInstalledChange
         guard WCSession.isSupported() else { return }
         let session = WCSession.default
         session.delegate = self
+        #if os(iOS)
+        onWatchAppInstalledChange?(session.isWatchAppInstalled)
+        #endif
         session.activate()
         if let snapshot = decodeSnapshot(from: session.receivedApplicationContext) {
             onSnapshot?(snapshot)
@@ -41,8 +49,16 @@ extension WatchConnectivityService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession,
                              activationDidCompleteWith activationState: WCSessionActivationState,
                              error: Error?) {
+        #if os(iOS)
+        let watchAppInstalled = session.isWatchAppInstalled
+        Task { @MainActor [weak self] in
+            self?.onWatchAppInstalledChange?(watchAppInstalled)
+            if let error { self?.activationError = error.localizedDescription }
+        }
+        #else
         guard let error else { return }
         Task { @MainActor [weak self] in self?.activationError = error.localizedDescription }
+        #endif
     }
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
@@ -51,6 +67,13 @@ extension WatchConnectivityService: WCSessionDelegate {
     }
 
     #if os(iOS)
+    nonisolated func sessionWatchStateDidChange(_ session: WCSession) {
+        let watchAppInstalled = session.isWatchAppInstalled
+        Task { @MainActor [weak self] in
+            self?.onWatchAppInstalledChange?(watchAppInstalled)
+        }
+    }
+
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {}
 
     nonisolated func sessionDidDeactivate(_ session: WCSession) {

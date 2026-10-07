@@ -6,6 +6,7 @@
 - CI runs `swift test --package-path Packages/WristGroveCore`, builds the iOS app including the embedded Watch app/widget for iOS Simulator, and builds the standalone Watch app/widget for Watch Simulator with Xcode 26 or newer.
 - Demo snapshots remain distinguishable in the app, Watch and complications; no demo value appears in real mode.
 - The iPhone landing screen opens as a face setup studio; changing the selected complication updates its preview and the matching manual setup guide.
+- iPhone detects whether the Watch companion app is installed and shows the Apple Watch app installation path when it is missing.
 
 ## Paired-device validation (record device/OS/build)
 

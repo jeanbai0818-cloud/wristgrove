@@ -9,6 +9,7 @@ final class AppModel {
     private(set) var isDemo = true
     private(set) var isRefreshing = false
     private(set) var errorMessage: String?
+    private(set) var isWatchAppInstalled: Bool?
 
     @ObservationIgnored private let store = SnapshotStore()
     @ObservationIgnored private let healthProvider = HealthKitDataProvider()
@@ -19,9 +20,10 @@ final class AppModel {
     init() {
         isDemo = store.isDemo
         snapshot = store.loadForWidget()
-        connectivity.start { [weak self] incoming in
-            self?.receive(incoming)
-        }
+        connectivity.start(
+            receiving: { [weak self] incoming in self?.receive(incoming) },
+            onWatchAppInstalledChange: { [weak self] installed in self?.isWatchAppInstalled = installed }
+        )
     }
 
     func refresh() async {

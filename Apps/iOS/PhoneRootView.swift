@@ -49,6 +49,9 @@ struct TodayView: View {
                     Spacer(minLength: 0)
                 }
                 if model.isDemo { DemoBadge() }
+                if model.isWatchAppInstalled == false {
+                    WatchAppInstallNotice()
+                }
                 GroveCard {
                     VStack(alignment: .leading, spacing: 14) {
                         Label(GroveCopy.text("组件预览", "Complication preview"), systemImage: "applewatch")
@@ -154,6 +157,31 @@ struct TodayView: View {
                 .buttonStyle(.borderedProminent)
                 .disabled(model.isRefreshing)
             }
+        }
+    }
+}
+
+private struct WatchAppInstallNotice: View {
+    var body: some View {
+        GroveCard {
+            Label {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(GroveCopy.text("先把腕森安装到手表", "Install WristGrove on Apple Watch"))
+                        .font(.subheadline.weight(.semibold))
+                    Text(GroveCopy.watchAppInstallNotice)
+                        .font(.footnote)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            } icon: {
+                Image(systemName: "applewatch.watchface")
+                    .font(.title2)
+                    .foregroundStyle(GroveStyle.forest)
+            }
+            .accessibilityElement(children: .combine)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(GroveStyle.sage.opacity(0.55), lineWidth: 1)
         }
     }
 }
@@ -299,11 +327,15 @@ private struct FaceDisplayChoiceRow: View {
 }
 
 private struct WatchFaceSetupGuideView: View {
+    @Environment(AppModel.self) private var model
     let choice: FaceDisplayChoice
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
+                if model.isWatchAppInstalled == false {
+                    WatchAppInstallNotice()
+                }
                 GroveCard {
                     VStack(alignment: .leading, spacing: 10) {
                         Label(GroveCopy.faceSetupTitle, systemImage: "applewatch")

@@ -59,9 +59,9 @@ enum GroveCopy {
 
     static func compactBand(_ band: HRVBand) -> String {
         switch band {
-        case .lower: text("偏低", "Below")
-        case .middle: text("范围内", "In range")
-        case .higher: text("偏高", "Above")
+        case .lower: text("HRV 偏低", "Low HRV")
+        case .middle: text("HRV 在范围内", "HRV in range")
+        case .higher: text("HRV 偏高", "High HRV")
         case .accumulating: text("积累中", "Building")
         case .insufficientVariation: text("未分级", "Unrated")
         }
@@ -98,6 +98,10 @@ enum GroveCopy {
         "This compares Apple Watch SDNN HRV samples with your recent personal range as a stress reference. HRV is also affected by exercise, sleep, and other factors; it does not directly measure mental stress or diagnose a condition.")
 
     static let faceSetupTitle = text("把压力参考放到表盘", "Add the stress reference to your face")
+
+    static let watchAppInstallNotice = text(
+        "腕森还没安装到 Apple Watch。打开 iPhone 上的 Watch App，进入“我的手表”，在“可用 App”中找到腕森并点“安装”。安装完成后，表盘组件才会出现在选择列表里。",
+        "WristGrove isn’t installed on Apple Watch yet. Open the Watch app on iPhone, tap My Watch, find WristGrove under Available Apps, and tap Install. Its complications appear in the picker after installation.")
 
     static let faceSetupLimit = text(
         "本版通过 Apple Watch 表盘组件展示健康信息。watchOS 要求你在手表上手动添加并确认位置；腕森不能静默改写当前表盘。",
