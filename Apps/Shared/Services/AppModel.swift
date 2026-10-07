@@ -42,7 +42,7 @@ final class AppModel {
             startObservingIfNeeded()
         } catch {
             errorMessage = userMessage(error)
-            snapshot = try? store.loadForWidget()
+            snapshot = store.loadForWidget()
             if !isDemo {
                 startObservingIfNeeded()
             }
@@ -64,14 +64,14 @@ final class AppModel {
             await refreshAfterConnection()
         } catch {
             errorMessage = userMessage(error)
-            snapshot = try? store.loadForWidget()
+            snapshot = store.loadForWidget()
         }
     }
 
     func setDemoMode(_ enabled: Bool) async {
         store.setDemoMode(enabled, updatedAt: Date())
         isDemo = enabled
-        snapshot = try? store.loadForWidget()
+        snapshot = store.loadForWidget()
         errorMessage = nil
         if enabled {
             await refresh()

@@ -37,7 +37,7 @@ final class WatchConnectivityService: NSObject {
 
 }
 
-extension WatchConnectivityService: @preconcurrency WCSessionDelegate {
+extension WatchConnectivityService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession,
                              activationDidCompleteWith activationState: WCSessionActivationState,
                              error: Error?) {
