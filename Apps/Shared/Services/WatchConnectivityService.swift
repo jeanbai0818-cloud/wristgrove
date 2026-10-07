@@ -13,8 +13,8 @@ final class WatchConnectivityService: NSObject {
         let session = WCSession.default
         session.delegate = self
         session.activate()
-        if let data = session.receivedApplicationContext["snapshot"] as? Data {
-            decodeAndDeliver(data)
+        if let snapshot = decodeSnapshot(from: session.receivedApplicationContext) {
+            onSnapshot?(snapshot)
         }
     }
 
@@ -35,10 +35,6 @@ final class WatchConnectivityService: NSObject {
         #endif
     }
 
-    private func decodeAndDeliver(_ data: Data) {
-        guard let snapshot = try? JSONDecoder().decode(HealthSnapshot.self, from: data) else { return }
-        onSnapshot?(snapshot)
-    }
 }
 
 extension WatchConnectivityService: @preconcurrency WCSessionDelegate {
@@ -50,8 +46,7 @@ extension WatchConnectivityService: @preconcurrency WCSessionDelegate {
     }
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        guard let data = applicationContext["snapshot"] as? Data,
-              let snapshot = try? JSONDecoder().decode(HealthSnapshot.self, from: data) else { return }
+        guard let snapshot = decodeSnapshot(from: applicationContext) else { return }
         Task { @MainActor [weak self] in self?.onSnapshot?(snapshot) }
     }
 
@@ -62,4 +57,17 @@ extension WatchConnectivityService: @preconcurrency WCSessionDelegate {
         session.activate()
     }
     #endif
+}
+
+private func decodeSnapshot(from context: [String: Any]) -> HealthSnapshot? {
+    guard let contextSchemaVersion = context["schemaVersion"] as? Int,
+          contextSchemaVersion == HealthSnapshot.currentSchemaVersion,
+          let data = context["snapshot"] as? Data,
+          let snapshot = try? JSONDecoder().decode(HealthSnapshot.self, from: data),
+          snapshot.schemaVersion == contextSchemaVersion,
+          let contextIsDemo = context["demo"] as? Bool,
+          snapshot.isDemo == contextIsDemo else {
+        return nil
+    }
+    return snapshot
 }

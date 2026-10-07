@@ -6,7 +6,6 @@ import WristGroveCore
 /// is responsible for transport between the phone and the watch.
 final class SnapshotStore: @unchecked Sendable {
     static let appGroupID = "group.io.github.jeanbai0818cloud.wristgrove"
-    private static let schemaVersion = 1
     private static let staleAfter: TimeInterval = 4 * 60 * 60
 
     private let directory: URL
@@ -46,14 +45,16 @@ final class SnapshotStore: @unchecked Sendable {
         let url = fileURL(isDemo: isDemo)
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         let snapshot = try JSONDecoder().decode(HealthSnapshot.self, from: Data(contentsOf: url))
-        guard snapshot.schemaVersion == Self.schemaVersion, snapshot.isDemo == isDemo else {
+        guard snapshot.schemaVersion == HealthSnapshot.currentSchemaVersion, snapshot.isDemo == isDemo else {
             throw SnapshotStoreError.invalidSnapshot
         }
         return snapshot
     }
 
     func save(_ snapshot: HealthSnapshot) throws {
-        guard snapshot.schemaVersion == Self.schemaVersion else { throw SnapshotStoreError.invalidSnapshot }
+        guard snapshot.schemaVersion == HealthSnapshot.currentSchemaVersion else {
+            throw SnapshotStoreError.invalidSnapshot
+        }
         lock.lock()
         defer { lock.unlock() }
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)

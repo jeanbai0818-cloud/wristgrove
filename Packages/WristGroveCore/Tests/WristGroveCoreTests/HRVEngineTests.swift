@@ -85,6 +85,35 @@ final class HRVEngineTests: XCTestCase {
         XCTAssertTrue(HRVEngine.assess(samples: enoughHistory + Array(today.prefix(2)), baseline: enoughBaseline, now: now, timeZone: utc).band == .accumulating)
     }
 
+    func testUnsupportedBaselineAlgorithmAccumulates() {
+        let now = Date(timeIntervalSince1970: 1_791_281_400)
+        let history = historicalSamples(now: now)
+        var baseline = HRVEngine.makeBaseline(samples: history, sourceID: "watch:A", now: now, timeZone: utc)
+        baseline.algorithmVersion += 1
+        let today = [sample(20, dayOffset: 0, hour: 5, index: 350, now: now),
+                     sample(21, dayOffset: 0, hour: 6, index: 351, now: now),
+                     sample(22, dayOffset: 0, hour: 9, index: 352, now: now)]
+
+        let result = HRVEngine.assess(samples: history + today, baseline: baseline, now: now, timeZone: utc)
+
+        XCTAssertEqual(result.band, .accumulating)
+        XCTAssertEqual(result.sampleCount, 0)
+    }
+
+    func testSamplesFromAnotherSourceDoNotMatchBaseline() {
+        let now = Date(timeIntervalSince1970: 1_791_281_400)
+        let sourceAHistory = historicalSamples(now: now)
+        let baseline = HRVEngine.makeBaseline(samples: sourceAHistory, sourceID: "watch:B", now: now, timeZone: utc)
+        let sourceAToday = [sample(20, dayOffset: 0, hour: 5, index: 360, now: now),
+                            sample(21, dayOffset: 0, hour: 6, index: 361, now: now),
+                            sample(22, dayOffset: 0, hour: 9, index: 362, now: now)]
+
+        let result = HRVEngine.assess(samples: sourceAHistory + sourceAToday, baseline: baseline, now: now, timeZone: utc)
+
+        XCTAssertEqual(result.band, .accumulating)
+        XCTAssertEqual(result.sampleCount, 0)
+    }
+
     func testInsufficientVariation() {
         let now = Date(timeIntervalSince1970: 1_791_281_400)
         let history = historicalSamples(now: now, values: Array(repeating: 40, count: 8))
@@ -104,6 +133,13 @@ final class HRVEngineTests: XCTestCase {
 
         let result = HRVEngine.validSamples([valid, valid, manual, wrongSource, invalid], sourceID: "watch:A")
         XCTAssertTrue(result == [valid])
+
+        let conflictingDuplicate = HRVSample(id: valid.id, valueMilliseconds: 49,
+                                             timestamp: valid.timestamp, sourceID: "watch:A")
+        let forward = HRVEngine.validSamples([valid, conflictingDuplicate], sourceID: "watch:A")
+        let reversed = HRVEngine.validSamples([conflictingDuplicate, valid], sourceID: "watch:A")
+        XCTAssertEqual(forward, reversed)
+        XCTAssertEqual(forward.first?.valueMilliseconds, 49)
     }
 
     func testTimezoneChange() {
@@ -130,6 +166,7 @@ final class HRVEngineTests: XCTestCase {
         XCTAssertTrue(points.count == 1)
         XCTAssertTrue(calendar.isDate(points[0].day, inSameDayAs: yesterday))
         XCTAssertTrue(points[0].sampleCount == 3)
+        XCTAssertEqual(points[0].medianMilliseconds, 41)
     }
 }
 
@@ -193,5 +230,35 @@ final class SnapshotMergerTests: XCTestCase {
         let merged = SnapshotMerger.merge(local: nil, incoming: snapshot, now: now)
         XCTAssertTrue(merged.reading(for: .steps)?.value == nil)
         XCTAssertTrue(merged.reading(for: .steps)?.state == .stale)
+    }
+
+    func testOlderSampleDoesNotOverwriteNewerValueWhenSnapshotArrivesLater() {
+        let now = Date(timeIntervalSince1970: 1_791_281_400)
+        let recentSample = now.addingTimeInterval(-60)
+        let olderSample = now.addingTimeInterval(-3_600)
+        let local = HealthSnapshot(generatedAt: now.addingTimeInterval(-120), isDemo: false,
+                                   readings: [MetricReading(metric: .hrvSDNN, value: 55, unit: "ms", sampledAt: recentSample)])
+        let incoming = HealthSnapshot(generatedAt: now, isDemo: false,
+                                      readings: [MetricReading(metric: .hrvSDNN, value: 42, unit: "ms", sampledAt: olderSample)])
+
+        let merged = SnapshotMerger.merge(local: local, incoming: incoming, now: now)
+
+        XCTAssertEqual(merged.reading(for: .hrvSDNN)?.value, 55)
+        XCTAssertEqual(merged.reading(for: .hrvSDNN)?.sampledAt, recentSample)
+    }
+
+    func testNewerSampleWinsEvenWhenSnapshotWasGeneratedEarlier() {
+        let now = Date(timeIntervalSince1970: 1_791_281_400)
+        let localSample = now.addingTimeInterval(-3_600)
+        let incomingSample = now.addingTimeInterval(-60)
+        let local = HealthSnapshot(generatedAt: now, isDemo: false,
+                                   readings: [MetricReading(metric: .hrvSDNN, value: 45, unit: "ms", sampledAt: localSample)])
+        let delayed = HealthSnapshot(generatedAt: now.addingTimeInterval(-300), isDemo: false,
+                                     readings: [MetricReading(metric: .hrvSDNN, value: 57, unit: "ms", sampledAt: incomingSample)])
+
+        let merged = SnapshotMerger.merge(local: local, incoming: delayed, now: now)
+
+        XCTAssertEqual(merged.reading(for: .hrvSDNN)?.value, 57)
+        XCTAssertEqual(merged.reading(for: .hrvSDNN)?.sampledAt, incomingSample)
     }
 }

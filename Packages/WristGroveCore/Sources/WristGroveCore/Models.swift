@@ -120,6 +120,8 @@ public struct TrendResult: Codable, Sendable, Equatable {
 }
 
 public struct HealthSnapshot: Codable, Sendable, Equatable {
+    public static let currentSchemaVersion = 1
+
     public var schemaVersion: Int
     public var generatedAt: Date
     public var timeZoneIdentifier: String
@@ -129,7 +131,7 @@ public struct HealthSnapshot: Codable, Sendable, Equatable {
     public var trend: TrendResult?
     public var dailyHRV: [DailyHRVPoint]
 
-    public init(schemaVersion: Int = 1, generatedAt: Date,
+    public init(schemaVersion: Int = HealthSnapshot.currentSchemaVersion, generatedAt: Date,
                 timeZoneIdentifier: String = TimeZone.current.identifier,
                 isDemo: Bool = false, readings: [MetricReading] = [],
                 baseline: HRVBaseline? = nil, trend: TrendResult? = nil,
