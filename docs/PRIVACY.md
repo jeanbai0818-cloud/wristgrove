@@ -8,5 +8,6 @@ Raw health samples stay in Apple Health on the user's devices. WristGrove comput
 
 The application does not have an account to delete. Users can stop Health access in iOS Settings > Privacy & Security > Health > WristGrove. The app's Settings screen can delete its local summaries; this does not delete Apple Health's original samples. A future App Store release must host this policy at an accessible public URL and have its privacy labels match the submitted build.
 
-Contact: open a privacy issue at https://github.com/jeanbai0818-cloud/wristgrove/issues.
+The included Apple privacy manifest declares the app-group UserDefaults use for mode/settings sharing and app-private fallback preferences. It declares no tracking domains and no collected data.
 
+Contact: open a privacy issue at https://github.com/jeanbai0818-cloud/wristgrove/issues.

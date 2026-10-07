@@ -1,0 +1,868 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03F7ACB24457F9EF17331945 /* GroveCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AB5EE3FD83C81153EBF55 /* GroveCopy.swift */; };
+		0C274E9FCC55B452DB8C3757 /* GroveCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AB5EE3FD83C81153EBF55 /* GroveCopy.swift */; };
+		0DAF0F9A3E7779DC5789D3B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEFE7E468A450D87999D414 /* Foundation.framework */; };
+		13E9D8E3C84F7605DFF5810F /* MetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25E0DBEF1139AC7707B69A /* MetricTile.swift */; };
+		195A25AEB66D797DA78AF43D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F22670217EC5C43B341B05F /* AppModel.swift */; };
+		209A4E59CFE46F70AE5FE04C /* WristGrove Watch Widgets.appex in Embed Watch App Extensions */ = {isa = PBXBuildFile; fileRef = 977E33240EA6BB52ACE2C5C1 /* WristGrove Watch Widgets.appex */; };
+		21F952876E3EADF5E5EF813A /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770BD00FC85A1DB6D8512BA7 /* SnapshotStore.swift */; };
+		2B4619CD7034DE0FA6C3C323 /* WristGrove Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D9496638C689A1888AD62446 /* WristGrove Watch.app */; };
+		38BD831F1CF53DEC73986580 /* HealthKitDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FCFC6715978251125FAF54 /* HealthKitDataProvider.swift */; };
+		3911FA8DF5CFE72895D5EF9B /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55AD5F827C4EFB0E3F3320 /* WatchConnectivityService.swift */; };
+		3BB5FB108C2A24E012E29437 /* GroveCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AB5EE3FD83C81153EBF55 /* GroveCopy.swift */; };
+		3E3F17F70A65E24AD2A9CE72 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D9A9855AE4B64677C6BA6859 /* PrivacyInfo.xcprivacy */; };
+		4335B061811629F66B1B76A4 /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55AD5F827C4EFB0E3F3320 /* WatchConnectivityService.swift */; };
+		4AE2EEB1550920845A2745C1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D9A9855AE4B64677C6BA6859 /* PrivacyInfo.xcprivacy */; };
+		56E34A965B950034599C91F0 /* WristGroveCore in Frameworks */ = {isa = PBXBuildFile; productRef = FD8FF1ACF33F7534BA21867C /* WristGroveCore */; };
+		5C0B44AE57DFA4E3627A539F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E2CD54652613A6152EBEA8B4 /* InfoPlist.strings */; };
+		5F9E0F77BA85522B9D6FF5EC /* GroveStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F3C9B6140B2AD7F71A2530 /* GroveStyle.swift */; };
+		616914D0457BFD4F325CE135 /* GroveStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F3C9B6140B2AD7F71A2530 /* GroveStyle.swift */; };
+		643ACFEF9EB1CAB3729EDD49 /* HealthPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C645D0E10902DCBB8BF699B5 /* HealthPresentation.swift */; };
+		6C26D610E59B974B39B4BD8D /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F2B064507116244F9DEB92 /* HealthKit.framework */; };
+		6F095BB06D6DCF782F24709D /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2422E3D57D3D18477E9DFA1 /* WatchConnectivity.framework */; };
+		81ED614E4843A64A4FC14A31 /* WristGroveWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2400CD0B00F107B20997BA4 /* WristGroveWidgets.swift */; };
+		8481DF364CF1D5247C1EEEC4 /* HealthKitDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FCFC6715978251125FAF54 /* HealthKitDataProvider.swift */; };
+		87AF2FF8BBA2D8F9F684031C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301D7EDE7FBACBCA4F59E7 /* WidgetKit.framework */; };
+		8AEC2D343BDF6C2154D10756 /* HealthPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C645D0E10902DCBB8BF699B5 /* HealthPresentation.swift */; };
+		97C96C25E424CA93C472D92B /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22821D685A297C74A4140B40 /* WatchConnectivity.framework */; };
+		A0358875CDC263EB3ACC21B6 /* GroveStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F3C9B6140B2AD7F71A2530 /* GroveStyle.swift */; };
+		AD9DC46C507CAE8917733024 /* HealthPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C645D0E10902DCBB8BF699B5 /* HealthPresentation.swift */; };
+		B289520F41F4DAC67D5F82E5 /* WatchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F3A7946EB37A31CDA7219 /* WatchRootView.swift */; };
+		BF5C62E65D43F754FA568D4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9310C6F6CB5880CEBA1A144 /* Foundation.framework */; };
+		C2DD30708DDD7E37792DBFC8 /* MetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25E0DBEF1139AC7707B69A /* MetricTile.swift */; };
+		CDDBBBC09B9A0389E64CE822 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEFE7E468A450D87999D414 /* Foundation.framework */; };
+		CEB3A174E3118CCFFF213116 /* WristGroveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DA75EB8773D26F8949BE37 /* WristGroveApp.swift */; };
+		DA10CC8453E35AD4886A8FFF /* WristGroveWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8664BF52956E8E3E06A62346 /* WristGroveWatchApp.swift */; };
+		DA1FA8665130CB9BC1BAC985 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01A57849D18F70CC8EA6418 /* HealthKit.framework */; };
+		DCEFD03808A3DF86A39B0C5C /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770BD00FC85A1DB6D8512BA7 /* SnapshotStore.swift */; };
+		E8F719FC877199C2BD0CFB18 /* MetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25E0DBEF1139AC7707B69A /* MetricTile.swift */; };
+		EB4356119B682FB7753F950C /* WristGroveCore in Frameworks */ = {isa = PBXBuildFile; productRef = 22B558B686DE4FE632B594DE /* WristGroveCore */; };
+		F3C11BFC260C859D9848DA42 /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770BD00FC85A1DB6D8512BA7 /* SnapshotStore.swift */; };
+		EFD9A8457FB68931EA3A8A56 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D9A9855AE4B64677C6BA6859 /* PrivacyInfo.xcprivacy */; };
+		F0B2CBE45508D64FDFEF38A7 /* WristGroveCore in Frameworks */ = {isa = PBXBuildFile; productRef = A1802A3345938DEBD72988ED /* WristGroveCore */; };
+		FAE77FAEC10773213D50F3CD /* PhoneRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8184B2A5DAA9BB74FDF800AC /* PhoneRootView.swift */; };
+		FDF280147C8ED23946CF5C14 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F22670217EC5C43B341B05F /* AppModel.swift */; };
+		FF9F5541DE577F87D128D9D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A63F73BCDBF8976891161C34 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2B8126DDA3A891A63ED26707 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6A68F6FEA09BAC680D83176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B76A2713258B1E49BA5CB973;
+			remoteInfo = "WristGrove Watch";
+		};
+		315EA992D987B558B51532B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6A68F6FEA09BAC680D83176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B579B7C7CB62E5AF940D48F8;
+			remoteInfo = "WristGrove Watch Widgets";
+		};
+		EAC198EDACA83EEE5F7DFFBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6A68F6FEA09BAC680D83176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B579B7C7CB62E5AF940D48F8;
+			remoteInfo = "WristGrove Watch Widgets";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EA6E01228B5CBF4E73ADE49 /* Embed Watch App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				209A4E59CFE46F70AE5FE04C /* WristGrove Watch Widgets.appex in Embed Watch App Extensions */,
+			);
+			name = "Embed Watch App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDB30428CD7A4DA0E046C2DE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				2B4619CD7034DE0FA6C3C323 /* WristGrove Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0338A4C129139BD7AA6F4FA3 /* en */ = {isa = PBXFileReference; includeInIndex = 1; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		187F3A7946EB37A31CDA7219 /* WatchRootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchRootView.swift; sourceTree = "<group>"; };
+		224AB5EE3FD83C81153EBF55 /* GroveCopy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GroveCopy.swift; sourceTree = "<group>"; };
+		22821D685A297C74A4140B40 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		3FC13C72DAF111C54CDE9DC6 /* en */ = {isa = PBXFileReference; includeInIndex = 1; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		59FCFC6715978251125FAF54 /* HealthKitDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitDataProvider.swift; sourceTree = "<group>"; };
+		66DA75EB8773D26F8949BE37 /* WristGroveApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WristGroveApp.swift; sourceTree = "<group>"; };
+		770BD00FC85A1DB6D8512BA7 /* SnapshotStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SnapshotStore.swift; sourceTree = "<group>"; };
+		8184B2A5DAA9BB74FDF800AC /* PhoneRootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneRootView.swift; sourceTree = "<group>"; };
+		84301D7EDE7FBACBCA4F59E7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8664BF52956E8E3E06A62346 /* WristGroveWatchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WristGroveWatchApp.swift; sourceTree = "<group>"; };
+		977E33240EA6BB52ACE2C5C1 /* WristGrove Watch Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WristGrove Watch Widgets.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		980B5A83760A09CCE43B5BBC /* zh-Hans */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		9F22670217EC5C43B341B05F /* AppModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		A2400CD0B00F107B20997BA4 /* WristGroveWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WristGroveWidgets.swift; sourceTree = "<group>"; };
+		A2422E3D57D3D18477E9DFA1 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		ABEFE7E468A450D87999D414 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AC76252778611A14A8F3F06D /* zh-Hans */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B3F3C9B6140B2AD7F71A2530 /* GroveStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GroveStyle.swift; sourceTree = "<group>"; };
+		BA25E0DBEF1139AC7707B69A /* MetricTile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MetricTile.swift; sourceTree = "<group>"; };
+		C645D0E10902DCBB8BF699B5 /* HealthPresentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthPresentation.swift; sourceTree = "<group>"; };
+		C8F1B513194DE1A61A3AEAA2 /* WristGrove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WristGrove.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9310C6F6CB5880CEBA1A144 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CC55AD5F827C4EFB0E3F3320 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
+		D9496638C689A1888AD62446 /* WristGrove Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WristGrove Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9A9855AE4B64677C6BA6859 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Shared/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		E01A57849D18F70CC8EA6418 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		F9F2B064507116244F9DEB92 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C530FC38A4984AE24A21DC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF5C62E65D43F754FA568D4E /* Foundation.framework in Frameworks */,
+				EB4356119B682FB7753F950C /* WristGroveCore in Frameworks */,
+				6C26D610E59B974B39B4BD8D /* HealthKit.framework in Frameworks */,
+				6F095BB06D6DCF782F24709D /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		941A0FDED2AD63B031B16724 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DAF0F9A3E7779DC5789D3B0 /* Foundation.framework in Frameworks */,
+				F0B2CBE45508D64FDFEF38A7 /* WristGroveCore in Frameworks */,
+				DA1FA8665130CB9BC1BAC985 /* HealthKit.framework in Frameworks */,
+				97C96C25E424CA93C472D92B /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBE7B39A3D1A127A8245C7DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDDBBBC09B9A0389E64CE822 /* Foundation.framework in Frameworks */,
+				56E34A965B950034599C91F0 /* WristGroveCore in Frameworks */,
+				87AF2FF8BBA2D8F9F684031C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B697EDC1B7E9FEC1A719592 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9F22670217EC5C43B341B05F /* AppModel.swift */,
+				59FCFC6715978251125FAF54 /* HealthKitDataProvider.swift */,
+				770BD00FC85A1DB6D8512BA7 /* SnapshotStore.swift */,
+				CC55AD5F827C4EFB0E3F3320 /* WatchConnectivityService.swift */,
+			);
+			name = Services;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		390498D99A95D99CE4790306 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C9310C6F6CB5880CEBA1A144 /* Foundation.framework */,
+				F9F2B064507116244F9DEB92 /* HealthKit.framework */,
+				A2422E3D57D3D18477E9DFA1 /* WatchConnectivity.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		39C467F47CB6E0465BC2188A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8F1B513194DE1A61A3AEAA2 /* WristGrove.app */,
+				D9496638C689A1888AD62446 /* WristGrove Watch.app */,
+				977E33240EA6BB52ACE2C5C1 /* WristGrove Watch Widgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66B9C377F8716490002DB572 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2B697EDC1B7E9FEC1A719592 /* Services */,
+				C8FAFAF6767378733D8A8B4E /* UI */,
+			);
+			name = Shared;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		7972EA01E544F62C95AE35A5 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				ABEFE7E468A450D87999D414 /* Foundation.framework */,
+				E01A57849D18F70CC8EA6418 /* HealthKit.framework */,
+				22821D685A297C74A4140B40 /* WatchConnectivity.framework */,
+				84301D7EDE7FBACBCA4F59E7 /* WidgetKit.framework */,
+			);
+			name = watchOS;
+			sourceTree = "<group>";
+		};
+		8AC07F702080998A78B9AFEC = {
+			isa = PBXGroup;
+			children = (
+				39C467F47CB6E0465BC2188A /* Products */,
+				C2DBCC5B7192CA6B49869321 /* Frameworks */,
+				DBDDB8175E7C539EF5B6301E /* Apps */,
+			);
+			sourceTree = "<group>";
+		};
+		B8B0F79FB2EF78B83DC27C67 /* WatchWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				A2400CD0B00F107B20997BA4 /* WristGroveWidgets.swift */,
+			);
+			name = WatchWidgets;
+			path = WatchWidgets;
+			sourceTree = "<group>";
+		};
+		C2DBCC5B7192CA6B49869321 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				390498D99A95D99CE4790306 /* iOS */,
+				7972EA01E544F62C95AE35A5 /* watchOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8FAFAF6767378733D8A8B4E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				224AB5EE3FD83C81153EBF55 /* GroveCopy.swift */,
+				B3F3C9B6140B2AD7F71A2530 /* GroveStyle.swift */,
+				C645D0E10902DCBB8BF699B5 /* HealthPresentation.swift */,
+				BA25E0DBEF1139AC7707B69A /* MetricTile.swift */,
+			);
+			name = UI;
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DBDDB8175E7C539EF5B6301E /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				E86FFB3E106513EB7EF382D4 /* iOS */,
+				DCE2320BBFBCD63D217713B2 /* Watch */,
+				B8B0F79FB2EF78B83DC27C67 /* WatchWidgets */,
+				66B9C377F8716490002DB572 /* Shared */,
+				D9A9855AE4B64677C6BA6859 /* PrivacyInfo.xcprivacy */,
+			);
+			name = Apps;
+			path = Apps;
+			sourceTree = "<group>";
+		};
+		DCE2320BBFBCD63D217713B2 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				187F3A7946EB37A31CDA7219 /* WatchRootView.swift */,
+				8664BF52956E8E3E06A62346 /* WristGroveWatchApp.swift */,
+				E2CD54652613A6152EBEA8B4 /* InfoPlist.strings */,
+			);
+			name = Watch;
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		E86FFB3E106513EB7EF382D4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8184B2A5DAA9BB74FDF800AC /* PhoneRootView.swift */,
+				66DA75EB8773D26F8949BE37 /* WristGroveApp.swift */,
+				A63F73BCDBF8976891161C34 /* InfoPlist.strings */,
+			);
+			name = iOS;
+			path = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B579B7C7CB62E5AF940D48F8 /* WristGrove Watch Widgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2086F44E7DA42C3DEDC181D9 /* Build configuration list for PBXNativeTarget "WristGrove Watch Widgets" */;
+			buildPhases = (
+				68C441BE8CBE2C91B295DC08 /* Sources */,
+				FBE7B39A3D1A127A8245C7DC /* Frameworks */,
+				873D1E743D46082F86A45D77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WristGrove Watch Widgets";
+			packageProductDependencies = (
+				FD8FF1ACF33F7534BA21867C /* WristGroveCore */,
+			);
+			productName = "WristGrove Watch Widgets";
+			productReference = 977E33240EA6BB52ACE2C5C1 /* WristGrove Watch Widgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B76A2713258B1E49BA5CB973 /* WristGrove Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2F2CDAFE078E8B7CBB41BCB /* Build configuration list for PBXNativeTarget "WristGrove Watch" */;
+			buildPhases = (
+				20005947089B8581E4424614 /* Sources */,
+				941A0FDED2AD63B031B16724 /* Frameworks */,
+				879799D65AB650EBB17ED992 /* Resources */,
+				2EA6E01228B5CBF4E73ADE49 /* Embed Watch App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2420B869093F0E468168337A /* PBXTargetDependency */,
+			);
+			name = "WristGrove Watch";
+			packageProductDependencies = (
+				A1802A3345938DEBD72988ED /* WristGroveCore */,
+			);
+			productName = "WristGrove Watch";
+			productReference = D9496638C689A1888AD62446 /* WristGrove Watch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CCBF8ED9EFBD4AA980C30E5F /* WristGrove */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBF04D0DA92AB56036120E7B /* Build configuration list for PBXNativeTarget "WristGrove" */;
+			buildPhases = (
+				F4DA9DB1C45D691AD51C811A /* Sources */,
+				3C530FC38A4984AE24A21DC3 /* Frameworks */,
+				600C591B402B3035260CE9EA /* Resources */,
+				EDB30428CD7A4DA0E046C2DE /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2399FEC4B75BA9721CB49FD0 /* PBXTargetDependency */,
+			);
+			name = WristGrove;
+			packageProductDependencies = (
+				22B558B686DE4FE632B594DE /* WristGroveCore */,
+			);
+			productName = WristGrove;
+			productReference = C8F1B513194DE1A61A3AEAA2 /* WristGrove.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6A68F6FEA09BAC680D83176 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2660;
+			};
+			buildConfigurationList = 9AE7CC86157120C5BC553DDD /* Build configuration list for PBXProject "WristGrove" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+				Base,
+			);
+			mainGroup = 8AC07F702080998A78B9AFEC;
+			minimizedProjectReferenceProxies = 0;
+			packageReferences = (
+				52461C417950C23DC7BF1863 /* XCLocalSwiftPackageReference "WristGroveCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 39C467F47CB6E0465BC2188A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CCBF8ED9EFBD4AA980C30E5F /* WristGrove */,
+				B76A2713258B1E49BA5CB973 /* WristGrove Watch */,
+				B579B7C7CB62E5AF940D48F8 /* WristGrove Watch Widgets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		600C591B402B3035260CE9EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFD9A8457FB68931EA3A8A56 /* PrivacyInfo.xcprivacy in Resources */,
+				FF9F5541DE577F87D128D9D7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		873D1E743D46082F86A45D77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE2EEB1550920845A2745C1 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		879799D65AB650EBB17ED992 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E3F17F70A65E24AD2A9CE72 /* PrivacyInfo.xcprivacy in Resources */,
+				5C0B44AE57DFA4E3627A539F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20005947089B8581E4424614 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B289520F41F4DAC67D5F82E5 /* WatchRootView.swift in Sources */,
+				DA10CC8453E35AD4886A8FFF /* WristGroveWatchApp.swift in Sources */,
+				195A25AEB66D797DA78AF43D /* AppModel.swift in Sources */,
+				8481DF364CF1D5247C1EEEC4 /* HealthKitDataProvider.swift in Sources */,
+				21F952876E3EADF5E5EF813A /* SnapshotStore.swift in Sources */,
+				4335B061811629F66B1B76A4 /* WatchConnectivityService.swift in Sources */,
+				0C274E9FCC55B452DB8C3757 /* GroveCopy.swift in Sources */,
+				A0358875CDC263EB3ACC21B6 /* GroveStyle.swift in Sources */,
+				AD9DC46C507CAE8917733024 /* HealthPresentation.swift in Sources */,
+				C2DD30708DDD7E37792DBFC8 /* MetricTile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C441BE8CBE2C91B295DC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81ED614E4843A64A4FC14A31 /* WristGroveWidgets.swift in Sources */,
+				F3C11BFC260C859D9848DA42 /* SnapshotStore.swift in Sources */,
+				03F7ACB24457F9EF17331945 /* GroveCopy.swift in Sources */,
+				616914D0457BFD4F325CE135 /* GroveStyle.swift in Sources */,
+				8AEC2D343BDF6C2154D10756 /* HealthPresentation.swift in Sources */,
+				E8F719FC877199C2BD0CFB18 /* MetricTile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4DA9DB1C45D691AD51C811A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE77FAEC10773213D50F3CD /* PhoneRootView.swift in Sources */,
+				CEB3A174E3118CCFFF213116 /* WristGroveApp.swift in Sources */,
+				FDF280147C8ED23946CF5C14 /* AppModel.swift in Sources */,
+				38BD831F1CF53DEC73986580 /* HealthKitDataProvider.swift in Sources */,
+				DCEFD03808A3DF86A39B0C5C /* SnapshotStore.swift in Sources */,
+				3911FA8DF5CFE72895D5EF9B /* WatchConnectivityService.swift in Sources */,
+				3BB5FB108C2A24E012E29437 /* GroveCopy.swift in Sources */,
+				5F9E0F77BA85522B9D6FF5EC /* GroveStyle.swift in Sources */,
+				643ACFEF9EB1CAB3729EDD49 /* HealthPresentation.swift in Sources */,
+				13E9D8E3C84F7605DFF5810F /* MetricTile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2399FEC4B75BA9721CB49FD0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WristGrove Watch";
+			target = B76A2713258B1E49BA5CB973 /* WristGrove Watch */;
+			targetProxy = 2B8126DDA3A891A63ED26707 /* PBXContainerItemProxy */;
+		};
+		2420B869093F0E468168337A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WristGrove Watch Widgets";
+			target = B579B7C7CB62E5AF940D48F8 /* WristGrove Watch Widgets */;
+			targetProxy = 315EA992D987B558B51532B7 /* PBXContainerItemProxy */;
+		};
+		79857DB0129D960A0B744FEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WristGrove Watch Widgets";
+			target = B579B7C7CB62E5AF940D48F8 /* WristGrove Watch Widgets */;
+			targetProxy = EAC198EDACA83EEE5F7DFFBB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A63F73BCDBF8976891161C34 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0338A4C129139BD7AA6F4FA3 /* en */,
+				AC76252778611A14A8F3F06D /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E2CD54652613A6152EBEA8B4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FC13C72DAF111C54CDE9DC6 /* en */,
+				980B5A83760A09CCE43B5BBC /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		024F6CF8ECDD27735BB88448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0BE3865F0AC5C5E59C44077F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = Apps/WatchWidgets/WristGroveWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/WatchWidgets/Info.plist;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove.watchkitapp.widgets;
+				PRODUCT_NAME = WristGroveWatchWidgets;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		19066CC97D983D4DA495BD8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Apps/Watch/WristGrove.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/Watch/Info.plist;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove.watchkitapp;
+				PRODUCT_NAME = WristGroveWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		4B7219FE8D85DDD8BAC030BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Apps/Watch/WristGrove.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/Watch/Info.plist;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove.watchkitapp;
+				PRODUCT_NAME = WristGroveWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		56AD7C7128EE63A430A8F817 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C85927ED1CDBFECAE2CB08F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = Apps/WatchWidgets/WristGroveWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/WatchWidgets/Info.plist;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove.watchkitapp.widgets;
+				PRODUCT_NAME = WristGroveWatchWidgets;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		EC135C7C594BE8C37EF41730 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Apps/iOS/WristGrove.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove;
+				PRODUCT_NAME = WristGrove;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FB054E3BB815FEFA4172781D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Apps/iOS/WristGrove.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Apps/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jeanbai0818cloud.wristgrove;
+				PRODUCT_NAME = WristGrove;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2086F44E7DA42C3DEDC181D9 /* Build configuration list for PBXNativeTarget "WristGrove Watch Widgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BE3865F0AC5C5E59C44077F /* Release */,
+				C85927ED1CDBFECAE2CB08F3 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AE7CC86157120C5BC553DDD /* Build configuration list for PBXProject "WristGrove" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				024F6CF8ECDD27735BB88448 /* Debug */,
+				56AD7C7128EE63A430A8F817 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2F2CDAFE078E8B7CBB41BCB /* Build configuration list for PBXNativeTarget "WristGrove Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19066CC97D983D4DA495BD8E /* Release */,
+				4B7219FE8D85DDD8BAC030BF /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBF04D0DA92AB56036120E7B /* Build configuration list for PBXNativeTarget "WristGrove" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB054E3BB815FEFA4172781D /* Release */,
+				EC135C7C594BE8C37EF41730 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		52461C417950C23DC7BF1863 /* XCLocalSwiftPackageReference "WristGroveCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/WristGroveCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22B558B686DE4FE632B594DE /* WristGroveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52461C417950C23DC7BF1863 /* XCLocalSwiftPackageReference "WristGroveCore" */;
+			productName = WristGroveCore;
+		};
+		A1802A3345938DEBD72988ED /* WristGroveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52461C417950C23DC7BF1863 /* XCLocalSwiftPackageReference "WristGroveCore" */;
+			productName = WristGroveCore;
+		};
+		FD8FF1ACF33F7534BA21867C /* WristGroveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52461C417950C23DC7BF1863 /* XCLocalSwiftPackageReference "WristGroveCore" */;
+			productName = WristGroveCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C6A68F6FEA09BAC680D83176 /* Project object */;
+}
